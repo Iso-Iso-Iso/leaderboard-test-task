@@ -23,7 +23,7 @@ const ACTION_OPTIONS = [
 export const LeaderboardForm = () => {
   const { control, handleSubmit, reset } = useForm({
     resolver: leaderboardFormResolver,
-    defaultValues: leaderboardFormDefaultValues,
+    defaultValues: leaderboardFormDefaultValues(),
   });
 
   const {
@@ -49,12 +49,13 @@ export const LeaderboardForm = () => {
 
     const payload = {
       userName: data.name,
-      value: data.value,
+      value: Number(data.value),
+      idempotencyKey: data.idempotencyKey,
     };
 
     mutateFn(payload, {
       onSuccess: () => {
-        reset(leaderboardFormDefaultValues);
+        reset(leaderboardFormDefaultValues());
       },
     });
   };

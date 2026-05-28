@@ -1,7 +1,6 @@
 import {
   Controller,
   Get,
-  Post,
   Patch,
   Body,
   Query,
@@ -16,8 +15,9 @@ import {
   LeaderboardUpsertDto,
   SortOrder,
 } from './leaderboard.dto';
+import { IdempotencyPipe } from '../../shared/pipes/idempotency.pipe';
 
-@Controller('leaderboard')
+@Controller('api/leaderboard')
 export class LeaderboardController {
   constructor(private readonly leaderboardService: LeaderboardService) {}
 
@@ -35,14 +35,14 @@ export class LeaderboardController {
     });
   }
 
-  @Post()
-  @UsePipes(new ZodValidationPipe(leaderboardUpsertSchema))
+  @Patch('rewrite')
+  @UsePipes(new ZodValidationPipe(leaderboardUpsertSchema), IdempotencyPipe)
   async createOrRewrite(@Body() body: LeaderboardUpsertDto) {
     return this.leaderboardService.createOrRewrite(body);
   }
 
   @Patch('append')
-  @UsePipes(new ZodValidationPipe(leaderboardUpsertSchema))
+  @UsePipes(new ZodValidationPipe(leaderboardUpsertSchema), IdempotencyPipe)
   async incrementOrCreate(@Body() body: LeaderboardUpsertDto) {
     return this.leaderboardService.incrementOrCreate(body);
   }
