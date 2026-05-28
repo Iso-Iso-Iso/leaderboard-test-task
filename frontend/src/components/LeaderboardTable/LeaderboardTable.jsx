@@ -8,6 +8,7 @@ import { Loader } from "@components/ui/Loader/Loader";
 import { useGetLeaderboardInfiniteQuery } from "@/services/leaderboard/useGetLeaderboardInfiniteQuery";
 import { Dropdown } from "@components/ui/Dropdown/Dropdown";
 import styles from "./leaderboardTable.module.css";
+import { useVirtualizer } from "@tanstack/react-virtual";
 import { useRef, useState } from "react";
 
 const HEADER_ITEMS = [{ text: "Rank" }, { text: "Name" }, { text: "Value" }];
@@ -30,6 +31,15 @@ export const LeaderboardTable = () => {
   } = useGetLeaderboardInfiniteQuery({ limit: 20, sort: sortType.value });
 
   const scrollAreaRef = useRef(null);
+
+  const rowVirtualizer = useVirtualizer({
+    count: allPositions.length,
+    getScrollElement: () => scrollAreaRef.current,
+    estimateSize: () => 40,
+    overscan: 5,
+  });
+
+  const virtualItems = rowVirtualizer.getVirtualItems();
 
   return (
     <Card className={styles.container}>
@@ -71,14 +81,30 @@ export const LeaderboardTable = () => {
 
       {!isGetLeaderboardLoading && !isError && allPositions.length > 0 && (
         <div className={styles.scrollWrapper} ref={scrollAreaRef}>
-          <TableWrapper headerItems={HEADER_ITEMS}>
-            {allPositions.map((row, index) => (
-              <TableRow key={row.id || index}>
-                <TableColumn>{row.rank}</TableColumn>
-                <TableColumn>{row.userName}</TableColumn>
-                <TableColumn>{row.value}</TableColumn>
-              </TableRow>
-            ))}
+          <TableWrapper
+            headerItems={HEADER_ITEMS}
+            headerRowClass={styles.headerRow}
+            bodyStyle={{
+              height: `${rowVirtualizer.getTotalSize()}px`,
+            }}
+          >
+            {virtualItems.map((virtualRow) => {
+              const row = allPositions[virtualRow.index];
+              return (
+                <TableRow
+                  key={row.id}
+                  className={styles.gridRow}
+                  rowRef={rowVirtualizer.measureElement}
+                  style={{
+                    transform: `translateY(${virtualRow.start}px)`,
+                  }}
+                >
+                  <TableColumn>{row.rank}</TableColumn>
+                  <TableColumn>{row.userName}</TableColumn>
+                  <TableColumn>{row.value}</TableColumn>
+                </TableRow>
+              );
+            })}
           </TableWrapper>
 
           {hasNextPage && (

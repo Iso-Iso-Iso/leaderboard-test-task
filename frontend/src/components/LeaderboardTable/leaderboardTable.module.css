@@ -44,3 +44,17 @@
   align-items: center;
   justify-content: center;
 }
+
+.headerRow {
+  display: grid;
+  grid-template-columns: 20% 40% 40%;
+}
+
+.gridRow {
+  display: grid;
+  grid-template-columns: 20% 40% 40%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}

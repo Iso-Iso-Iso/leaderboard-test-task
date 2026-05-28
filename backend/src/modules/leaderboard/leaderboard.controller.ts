@@ -9,13 +9,13 @@ import {
   ParseEnumPipe,
 } from '@nestjs/common';
 import { LeaderboardService } from './leaderboard.service';
-import { ZodValidationPipe } from '../../shared/pipes/zod-validation.pipe';
+import { ZodValidationPipe } from '../../pipes/zod-validation.pipe';
 import {
   leaderboardUpsertSchema,
   LeaderboardUpsertDto,
   SortOrder,
 } from './leaderboard.dto';
-import { IdempotencyPipe } from '../../shared/pipes/idempotency.pipe';
+import { IdempotencyPipe } from '../../pipes/idempotency.pipe';
 
 @Controller('api/leaderboard')
 export class LeaderboardController {
