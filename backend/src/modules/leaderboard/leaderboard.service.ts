@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../shared/prisma/prisma.service';
 import { LeaderboardUpsertDto, SortOrder } from './leaderboard.dto';
-import { Prisma } from 'src/generated/client';
+import { Prisma } from '../../generated/client';
 
 @Injectable()
 export class LeaderboardService {
