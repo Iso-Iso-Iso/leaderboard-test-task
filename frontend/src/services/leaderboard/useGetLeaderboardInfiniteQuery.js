@@ -14,10 +14,7 @@ const getLeaderboardFn = async ({ page, limit, sort, signal }) => {
   });
 };
 
-export const useGetLeaderboardInfiniteQuery = ({
-  limit = 10,
-  sort = "desc",
-}) => {
+export const useGetLeaderboardInfiniteQuery = ({ limit, sort }) => {
   return useInfiniteQuery({
     queryKey: leaderboardKeys({ limit, sort }),
     queryFn: async ({ pageParam = 1, signal }) => {
