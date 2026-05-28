@@ -5,14 +5,13 @@ export const Button = ({
   disabled = false,
   onClick,
   children,
-  variant = 'primary',
   fullWidth = false,
 }) => {
   return (
     <button
       disabled={disabled}
       onClick={onClick}
-      className={clsx(styles.button, styles[variant], fullWidth && styles.fullWidth)}
+      className={clsx(styles.button, fullWidth && styles.fullWidth)}
     >
       {children}
     </button>

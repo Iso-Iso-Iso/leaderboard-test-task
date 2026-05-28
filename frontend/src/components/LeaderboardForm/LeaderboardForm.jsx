@@ -78,7 +78,6 @@ export const LeaderboardForm = () => {
               name={LEADERBOARD_FORM_FIELDS.NAME}
               label="Name"
               placeholder="Enter player name..."
-              disabled={isPending}
             />
           </div>
 
@@ -98,7 +97,7 @@ export const LeaderboardForm = () => {
               name={LEADERBOARD_FORM_FIELDS.VALUE}
               label="Value"
               placeholder="Enter numeric value..."
-              disabled={isPending}
+              type="number"
             />
           </div>
 

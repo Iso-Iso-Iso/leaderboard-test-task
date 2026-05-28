@@ -1,9 +1,8 @@
-import clsx from "clsx";
 import styles from "./tableWrapper.module.css";
 
-export const TableWrapper = ({ headerItems = [], children, className, bodyStyle, headerRowClass }) => {
+export const TableWrapper = ({ headerItems = [], children, bodyStyle, headerRowClass }) => {
   return (
-    <div className={clsx(styles.tableContainer, className)}>
+    <div className={styles.tableContainer}>
       <table className={styles.table}>
         <thead>
           <tr className={headerRowClass}>
