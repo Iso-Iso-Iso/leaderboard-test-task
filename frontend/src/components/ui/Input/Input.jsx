@@ -1,24 +1,29 @@
-import clsx from 'clsx';
-import { useController } from 'react-hook-form';
-import styles from './Input.module.css';
+import clsx from "clsx";
+import { useController } from "react-hook-form";
+import { InfoIcon } from "../InfoIcon/InfoIcon";
+import styles from "./Input.module.css";
 
 export const Input = ({
   control,
   name,
   label,
   placeholder,
-  disabled = false,
-  type = 'text',
+  type = "text",
 }) => {
   const {
-    field: { value = '', onChange, onBlur, ref },
+    field: { value = "", onChange, onBlur, ref },
     fieldState: { error },
   } = useController({ control, name });
 
   return (
     <div className={clsx(styles.container, { [styles.errorState]: error })}>
-      {label && <label className={styles.label}>{label}</label>}
-      
+      {(label || error) && (
+        <div className={styles.labelWrapper}>
+          {label && <label className={styles.label}>{label}</label>}
+          {error && <InfoIcon tooltipText={error.message} />}
+        </div>
+      )}
+
       <input
         ref={ref}
         type={type}
@@ -26,11 +31,8 @@ export const Input = ({
         onChange={onChange}
         onBlur={onBlur}
         placeholder={placeholder}
-        disabled={disabled}
         className={styles.input}
       />
-      
-      {error && <span className={styles.error}>{error.message}</span>}
     </div>
   );
 };

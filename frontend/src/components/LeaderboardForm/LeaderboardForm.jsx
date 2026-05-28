@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { Card } from "@components/ui/Card/Card";
 import { Typography } from "@components/ui/Typography/Typography";
 import { Input } from "@components/ui/Input/Input";
-import { Dropdown } from "@components/ui/Dropdown/Dropdown";
+import { FormDropdown } from "@components/ui/Dropdown/Dropdown";
 import { Button } from "@components/ui/Button/Button";
 import { Loader } from "@components/ui/Loader/Loader";
 import {
@@ -82,13 +82,12 @@ export const LeaderboardForm = () => {
           </div>
 
           <div className={styles.fieldWrapper}>
-            <Dropdown
+            <FormDropdown
               control={control}
               name={LEADERBOARD_FORM_FIELDS.ACTION}
               options={ACTION_OPTIONS}
               label="Action"
               placeholder="Choose action..."
-              disabled={isPending}
             />
           </div>
 

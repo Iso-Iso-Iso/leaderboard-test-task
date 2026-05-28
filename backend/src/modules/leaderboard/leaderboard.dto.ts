@@ -6,3 +6,8 @@ export const leaderboardUpsertSchema = z.object({
 });
 
 export type LeaderboardUpsertDto = z.infer<typeof leaderboardUpsertSchema>;
+
+export enum SortOrder {
+  ASC = 'ASC',
+  DESC = 'DESC',
+}

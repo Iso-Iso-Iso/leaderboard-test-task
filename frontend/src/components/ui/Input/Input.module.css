@@ -5,6 +5,13 @@
   width: 100%;
   font-family: var(--font-primary);
 
+  .labelWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+  }
+
   .label {
     font-size: 13.5px;
     font-weight: 550;
@@ -29,20 +36,13 @@
       color: var(--grey);
     }
 
-    &:hover:not(:disabled) {
+    &:hover {
       border-color: var(--grey);
     }
 
-    &:focus:not(:disabled) {
+    &:focus {
       border-color: var(--blue);
       box-shadow: var(--shadow-focus);
-    }
-
-    &:disabled {
-      background-color: var(--grey-light);
-      border-color: var(--grey-light);
-      color: var(--grey);
-      cursor: not-allowed;
     }
   }
 
@@ -57,11 +57,11 @@
   .input {
     border-color: var(--danger);
 
-    &:hover:not(:disabled) {
+    &:hover {
       border-color: var(--danger-dark);
     }
 
-    &:focus:not(:disabled) {
+    &:focus {
       border-color: var(--danger);
       box-shadow: var(--shadow-focus-danger);
     }

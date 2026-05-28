@@ -6,12 +6,20 @@ import { Typography } from "@components/ui/Typography/Typography";
 import { IntersectionTrigger } from "@components/IntersectionTrigger/IntersectionTrigger";
 import { Loader } from "@components/ui/Loader/Loader";
 import { useGetLeaderboardInfiniteQuery } from "@/services/leaderboard/useGetLeaderboardInfiniteQuery";
+import { Dropdown } from "@components/ui/Dropdown/Dropdown";
 import styles from "./leaderboardTable.module.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const HEADER_ITEMS = [{ text: "Rank" }, { text: "Name" }, { text: "Value" }];
 
+const SORT_OPTIONS = [
+  { value: "DESC", label: "Highest first" },
+  { value: "ASC", label: "Lowest first" },
+];
+
 export const LeaderboardTable = () => {
+  const [sortType, setSortType] = useState(SORT_OPTIONS[0]);
+
   const {
     data: allPositions = [],
     fetchNextPage,
@@ -19,7 +27,7 @@ export const LeaderboardTable = () => {
     isFetchingNextPage,
     isLoading: isGetLeaderboardLoading,
     isError,
-  } = useGetLeaderboardInfiniteQuery(20);
+  } = useGetLeaderboardInfiniteQuery({ limit: 20, sort: sortType.value });
 
   const scrollAreaRef = useRef(null);
 
@@ -27,6 +35,14 @@ export const LeaderboardTable = () => {
     <Card className={styles.container}>
       <div className={styles.header}>
         <Typography variant="title" text="Current Standings" />
+        <div className={styles.sortDropdownWrapper}>
+          <Dropdown
+            options={SORT_OPTIONS}
+            value={sortType}
+            onChange={setSortType}
+            placeholder="Sort by..."
+          />
+        </div>
       </div>
 
       {isGetLeaderboardLoading && (
@@ -58,7 +74,7 @@ export const LeaderboardTable = () => {
           <TableWrapper headerItems={HEADER_ITEMS}>
             {allPositions.map((row, index) => (
               <TableRow key={row.id || index}>
-                <TableColumn>{index + 1}</TableColumn>
+                <TableColumn>{row.rank}</TableColumn>
                 <TableColumn>{row.userName}</TableColumn>
                 <TableColumn>{row.value}</TableColumn>
               </TableRow>

@@ -1,15 +1,44 @@
 import clsx from "clsx";
 import { useController } from "react-hook-form";
 import Select from "react-select";
+import { InfoIcon } from "../InfoIcon/InfoIcon";
 import styles from "./Dropdown.module.css";
 
 export const Dropdown = ({
   options,
-  control,
-  name,
+  value,
+  onChange,
   placeholder = "Select an option...",
   label,
-  disabled = false,
+  error,
+}) => {
+  return (
+    <div className={clsx(styles.container, { [styles.errorState]: error })}>
+      {(label || error) && (
+        <div className={styles.labelWrapper}>
+          {label && <label className={styles.label}>{label}</label>}
+          {error && <InfoIcon tooltipText={error.message} />}
+        </div>
+      )}
+
+      <Select
+        options={options}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        classNamePrefix="dropdown"
+        isSearchable={false}
+      />
+    </div>
+  );
+};
+
+export const FormDropdown = ({
+  options,
+  control,
+  name,
+  placeholder,
+  label,
 }) => {
   const {
     field: { value, onChange },
@@ -17,20 +46,13 @@ export const Dropdown = ({
   } = useController({ control, name });
 
   return (
-    <div className={clsx(styles.container, { [styles.errorState]: error })}>
-      {label && <label className={styles.label}>{label}</label>}
-
-      <Select
-        options={options}
-        value={value}
-        onChange={onChange}
-        placeholder={placeholder}
-        isDisabled={disabled}
-        classNamePrefix="dropdown"
-        isSearchable={false}
-      />
-
-      {error && <span className={styles.error}>{error.message}</span>}
-    </div>
+    <Dropdown
+      options={options}
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      label={label}
+      error={error}
+    />
   );
 };
