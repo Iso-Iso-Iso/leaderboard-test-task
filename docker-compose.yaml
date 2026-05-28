@@ -1,0 +1,76 @@
+services:
+  frontend:
+    env_file:
+      - .env
+    build:
+      dockerfile: ./Dockerfile
+      context: ./frontend
+    ports:
+      - "5173:5173"
+    networks:
+      - client
+    develop:
+      watch:
+        - action: sync
+          path: frontend/src
+          target: /frontend/src
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: frontend/package.json
+
+  backend:
+    environment:
+      NODE_ENV: development
+    env_file:
+      - .env
+    build:
+      dockerfile: ./Dockerfile
+      context: ./backend
+    depends_on:
+      - database
+    ports:
+      - "3000:3000"
+    networks:
+      - database
+      - client
+    volumes:
+      - ./backend/src/prisma/migrations:/backend/src/prisma/migrations
+      - ./backend/src/generated:/backend/src/generated
+    develop:
+      watch:
+        - action: sync
+          path: backend/src
+          target: /backend/src
+          ignore:
+            - node_modules/
+            - prisma/migrations/
+            - generated/
+        - action: rebuild
+          path: backend/package.json
+  database:
+    env_file:
+      - .env
+    image: postgres
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_DB: ${DATABASE_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks:
+      - database
+
+volumes:
+  postgres_data:
+
+networks:
+  database:
+    driver: bridge
+  client:
+    driver: bridge
+name: leaderboard:dev

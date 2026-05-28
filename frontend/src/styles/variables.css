@@ -1,0 +1,25 @@
+:root {
+  /* Typography */
+  --font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Colors */
+  --white: #ffffff;
+  --black: hsl(222, 47%, 11%);
+  --grey-dark: hsl(222, 47%, 20%);
+  --grey: hsl(215, 16%, 50%);
+  --grey-light: hsl(0, 19%, 95%);
+
+  --blue-dark: hsl(217, 91%, 50%);
+  --blue: hsl(217, 91%, 60%);
+  --blue-light: hsl(214, 32%, 95%);
+
+  --danger: hsl(0, 84%, 60%);
+  --danger-dark: hsl(0, 84%, 50%);
+
+  /* Shadows */
+  --shadow-sm: 0 2px 6px rgba(37, 99, 235, 0.2);
+  --shadow-md: 0 4px 12px rgba(37, 99, 235, 0.25);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-focus: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  --shadow-focus-danger: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}

@@ -1,0 +1,12 @@
+.tr {
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid var(--grey-light);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: var(--grey-light);
+  }
+}

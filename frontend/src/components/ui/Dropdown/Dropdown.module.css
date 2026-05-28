@@ -1,0 +1,136 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  font-family: var(--font-primary);
+
+  .label {
+    font-size: 13.5px;
+    font-weight: 550;
+    color: var(--grey-dark);
+    user-select: none;
+  }
+
+  .error {
+    font-size: 12px;
+    color: var(--danger);
+    margin-top: 2px;
+  }
+
+  /* React Select overrides utilizing native CSS nesting */
+
+  :global(.dropdown__control) {
+    min-height: 44px;
+    border-radius: 8px;
+    border: 1px solid var(--grey-light);
+    background-color: var(--white);
+    box-shadow: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--grey);
+    }
+  }
+
+  :global(.dropdown__control--is-focused) {
+    border-color: var(--blue) !important;
+    box-shadow: var(--shadow-focus) !important;
+  }
+
+  :global(.dropdown__control--is-disabled) {
+    background-color: var(--grey-light) !important;
+    border-color: var(--grey-light) !important;
+    cursor: not-allowed;
+  }
+
+  :global(.dropdown__value-container) {
+    padding: 2px 12px;
+  }
+
+  :global(.dropdown__placeholder) {
+    color: var(--grey);
+    font-size: 14px;
+  }
+
+  :global(.dropdown__single-value) {
+    color: var(--black);
+    font-size: 14px;
+  }
+
+  :global(.dropdown__dropdown-indicator) {
+    color: var(--grey);
+    padding-right: 12px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--blue-dark);
+    }
+  }
+
+  :global(.dropdown__control--is-focused) :global(.dropdown__dropdown-indicator) {
+    color: var(--blue);
+  }
+
+  :global(.dropdown__indicator-separator) {
+    display: none;
+  }
+
+  :global(.dropdown__menu) {
+    border-radius: 12px;
+    box-shadow: var(--shadow-card) !important;
+    border: 1px solid var(--grey-light) !important;
+    margin-top: 6px !important;
+    overflow: hidden;
+  }
+
+  :global(.dropdown__menu-list) {
+    padding: 6px !important;
+  }
+
+  :global(.dropdown__option) {
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    background-color: transparent;
+    color: var(--black);
+
+    &:active {
+      background-color: var(--grey-light);
+    }
+  }
+
+  :global(.dropdown__option--is-focused) {
+    background-color: var(--blue-light);
+    color: var(--black);
+  }
+
+  :global(.dropdown__option--is-selected) {
+    background-color: var(--blue) !important;
+    color: var(--white) !important;
+
+    &:active {
+      background-color: var(--blue-dark) !important;
+    }
+  }
+}
+
+/* Error States */
+.errorState {
+  :global(.dropdown__control) {
+    border-color: var(--danger) !important;
+
+    &:hover {
+      border-color: var(--danger-dark) !important;
+    }
+  }
+
+  :global(.dropdown__control--is-focused) {
+    border-color: var(--danger) !important;
+    box-shadow: var(--shadow-focus-danger) !important;
+  }
+}

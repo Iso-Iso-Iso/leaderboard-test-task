@@ -1,0 +1,39 @@
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.scrollWrapper {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding-bottom: 8px;
+}
+
+.loadMoreWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.messageState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 32px;
+  color: var(--text-secondary, #6b7280);
+}
+
+.loaderWrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}

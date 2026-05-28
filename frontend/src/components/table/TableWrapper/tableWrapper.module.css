@@ -1,0 +1,21 @@
+.tableContainer {
+  width: 100%;
+  font-family: var(--font-primary);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.th {
+  padding: 12px 16px;
+  background-color: transparent;
+  color: var(--grey-dark);
+  font-weight: 600;
+  font-size: 13.5px;
+  border-bottom: 1px solid var(--grey-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

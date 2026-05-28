@@ -1,0 +1,43 @@
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  margin: 0 auto;
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-bottom: 1px solid var(--grey-light);
+    padding-bottom: 16px;
+    margin-bottom: 8px;
+  }
+
+  .rowFields {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+    width: 100%;
+
+    .fieldWrapper {
+      flex: 1;
+      min-width: 150px;
+    }
+
+    .buttonWrapper {
+      flex: 0 0 auto;
+      min-width: 140px;
+      margin-bottom: 2px;
+    }
+  }
+}
+
+.loaderWrapper {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}

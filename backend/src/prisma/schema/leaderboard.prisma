@@ -1,0 +1,5 @@
+model LeaderboardPosition {
+  id       Int    @id @default(autoincrement())
+  userName String @unique
+  value    Int
+}

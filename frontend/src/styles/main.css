@@ -1,0 +1,13 @@
+@import "./variables.css";
+
+@import "normalize.css";
+
+body {
+  margin: 0;
+}
+
+body,
+html,
+#root {
+  height: 100%;
+}
