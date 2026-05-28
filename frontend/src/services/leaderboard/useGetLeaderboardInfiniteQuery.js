@@ -18,8 +18,6 @@ export const useGetLeaderboardInfiniteQuery = ({ limit, sort }) => {
   return useInfiniteQuery({
     queryKey: leaderboardKeys({ limit, sort }),
     queryFn: async ({ pageParam = 1, signal }) => {
-      console.log("CALLED");
-
       return getLeaderboardFn({ page: pageParam, limit, sort, signal });
     },
     initialPageParam: 1,

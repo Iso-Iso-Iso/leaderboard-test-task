@@ -94,6 +94,7 @@ export const LeaderboardTable = () => {
                 <TableRow
                   key={row.id}
                   className={styles.gridRow}
+                  dataIndex={virtualRow.index}
                   rowRef={rowVirtualizer.measureElement}
                   style={{
                     transform: `translateY(${virtualRow.start}px)`,
